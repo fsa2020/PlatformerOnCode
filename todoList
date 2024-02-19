@@ -1,0 +1,16 @@
+//1. dispatch wrapper center area shape
+//2. dispatch wrapper area tip
+// 3. plot character appear pos
+4. add audio effect
+//5. add my github link
+//5. hide grab area when floor disappear
+//6. add left/right level bound
+//7. modify trap door display
+8. add json file in pack
+9. add lv4 trap cfg
+10. time pause set trap near player
+
+//new traps
+1. add a moveable ball trap : 
+    absorbs player and moves as player enter
+    breaks and releases player as input jump or crash blocks

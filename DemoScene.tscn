@@ -1,0 +1,237 @@
+[gd_scene load_steps=32 format=3 uid="uid://cqfhnpb7xftpo"]
+
+[ext_resource type="Script" path="res://platformer_controller/platformer_controller.gd" id="1"]
+[ext_resource type="Script" path="res://UI/panel_cmd.gd" id="1_c4sif"]
+[ext_resource type="Script" path="res://platformer_floor/platformer_floor.gd" id="1_gwx1h"]
+[ext_resource type="Script" path="res://managers/audio_manager.gd" id="1_y4uax"]
+[ext_resource type="Script" path="res://managers/action_manager.gd" id="2_0tbl2"]
+[ext_resource type="Script" path="res://UI/panel_plot.gd" id="2_lbqf4"]
+[ext_resource type="Script" path="res://UI/game_menu.gd" id="3_bieh8"]
+[ext_resource type="Texture2D" uid="uid://di5a1pv5iuup3" path="res://icon.png" id="3_di7o4"]
+[ext_resource type="Script" path="res://platformer_controller/trans_controller.gd" id="4_jvr0s"]
+[ext_resource type="Script" path="res://camera_controller/camera_controller.gd" id="5_lsfwt"]
+[ext_resource type="Script" path="res://managers/level_manager.gd" id="7_12eua"]
+[ext_resource type="Script" path="res://platformer_floor/traps/enter_trap_box.gd" id="7_qx4p6"]
+[ext_resource type="Script" path="res://platformer_floor/traps/trap_root.gd" id="8_ibm4j"]
+[ext_resource type="Texture2D" uid="uid://dtac72l6g3f3" path="res://asset/player/sprite.png" id="9_fccpv"]
+[ext_resource type="Texture2D" uid="uid://blm4tbjgh1mow" path="res://asset/player/sprite1.png" id="11_4js31"]
+[ext_resource type="Script" path="res://managers/trans_manager.gd" id="11_lsu6a"]
+[ext_resource type="Script" path="res://platformer_controller/time_pause_controller.gd" id="12_efvpf"]
+[ext_resource type="Script" path="res://platformer_controller/playerAnimation.gd" id="15_2yx61"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2gh0"]
+atlas = ExtResource("11_4js31")
+region = Rect2(32, 0, 16, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eurp4"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ttk6"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oa0wm"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(32, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rirwy"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(48, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojnag"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(0, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r21eq"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(16, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qriqr"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(32, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1th7"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(48, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_880a1"]
+atlas = ExtResource("9_fccpv")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1am8u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2gh0")
+}],
+"loop": true,
+"name": &"grab",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eurp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ttk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa0wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rirwy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojnag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r21eq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qriqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1th7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_880a1")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(20, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40xl6"]
+size = Vector2(20, 34)
+
+[node name="Main" type="Node2D"]
+metadata/_edit_vertical_guides_ = []
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("1_y4uax")
+
+[node name="ActionManager" type="Node" parent="."]
+script = ExtResource("2_0tbl2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WordRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 15.0
+offset_top = -129.0
+offset_right = 615.0
+offset_bottom = -13.0
+color = Color(0.494118, 0.494118, 0.494118, 1)
+script = ExtResource("1_c4sif")
+
+[node name="PlotPanel" type="Panel" parent="CanvasLayer"]
+offset_right = 1024.0
+offset_bottom = 600.0
+script = ExtResource("2_lbqf4")
+
+[node name="cRight" type="Sprite2D" parent="CanvasLayer/PlotPanel"]
+position = Vector2(-107, 280)
+texture = ExtResource("3_di7o4")
+
+[node name="cLeft" type="Sprite2D" parent="CanvasLayer/PlotPanel"]
+position = Vector2(1164, 298)
+texture = ExtResource("3_di7o4")
+
+[node name="WordRect" type="ColorRect" parent="CanvasLayer/PlotPanel"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 631.0
+offset_right = 952.0
+offset_bottom = 747.0
+color = Color(0.494118, 0.494118, 0.494118, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/PlotPanel/WordRect"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 12.0
+offset_right = 820.0
+offset_bottom = 105.0
+
+[node name="PerformPanel" type="Panel" parent="CanvasLayer/PlotPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_bieh8")
+
+[node name="LevelManager" type="Node2D" parent="."]
+script = ExtResource("7_12eua")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
+anchor_mode = 0
+script = ExtResource("5_lsfwt")
+
+[node name="PlatformerFloor" type="Node2D" parent="."]
+script = ExtResource("1_gwx1h")
+
+[node name="TrapRoot" type="Node2D" parent="."]
+script = ExtResource("8_ibm4j")
+
+[node name="Trans" type="Node2D" parent="."]
+script = ExtResource("11_lsu6a")
+
+[node name="PlatformerController2D" type="CharacterBody2D" parent="."]
+position = Vector2(752, 320)
+collision_layer = 2
+collision_mask = 17
+script = ExtResource("1")
+max_jump_height = 40.0
+min_jump_height = 25.0
+double_jump_height = 40.0
+can_rush = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlatformerController2D"]
+position = Vector2(0, -7)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_1am8u")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("15_2yx61")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformerController2D"]
+shape = SubResource("4")
+
+[node name="TransController" type="Node2D" parent="PlatformerController2D"]
+script = ExtResource("4_jvr0s")
+
+[node name="PauseController" type="Node2D" parent="PlatformerController2D"]
+process_mode = 3
+script = ExtResource("12_efvpf")
+
+[node name="EnterTrapBox" type="Area2D" parent="PlatformerController2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("7_qx4p6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformerController2D/EnterTrapBox"]
+shape = SubResource("RectangleShape2D_40xl6")

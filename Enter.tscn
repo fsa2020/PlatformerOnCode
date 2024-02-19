@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://6aeqhsfrg5wf"]
+
+[ext_resource type="Script" path="res://managers/action_manager.gd" id="1_a668e"]
+[ext_resource type="Script" path="res://UI/game_enter.gd" id="1_sm7o2"]
+[ext_resource type="Texture2D" uid="uid://di5a1pv5iuup3" path="res://icon.png" id="2_dpva3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ActionManager" type="Node" parent="."]
+script = ExtResource("1_a668e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_sm7o2")
+
+[node name="ButtonNew" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 200.0
+offset_right = 554.0
+offset_bottom = 272.0
+text = "new game"
+icon = ExtResource("2_dpva3")
+
+[node name="ButtonContinue" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 300.0
+offset_right = 543.0
+offset_bottom = 372.0
+text = "continue"
+icon = ExtResource("2_dpva3")
+
+[node name="ButtonSetting" type="Button" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_left = 400.0
+offset_top = 400.0
+offset_right = 535.0
+offset_bottom = 472.0
+text = "settings"
+icon = ExtResource("2_dpva3")
