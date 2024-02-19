@@ -1,16 +1,15 @@
 # PlatformerOnCode Demo 
-A platformer demo which use 'code blocks' platform , including :
-level generation by python file ; 
-character control ;
-trap system (spring, trigger, pry ... ) enabled player to pause time and place the trap ; 
-Building transforms by 'code blocks' ; 
-easy plot dialog ;
-user record saving.
+A platformer demo which use 'code blocks' platform , including : 
+1. Level generation by python file.
+2. Character control ;trap system (spring, trigger, pry ... ) enabled player to pause time and place the trap .
+3. Building transforms by 'code blocks'. 
+4. Easy plot dialog ;
+5. Simple user record saving.
 
 # Generate platform by codes
-Edit level you want in c++ codes like : platformer_floor\codeFloor\floor0.cpp
-Change level id in py code
-Run lexer.py to generate json file
+1. Edit level you want in c++ codes like : platformer_floor\codeFloor\floor0.cpp
+2. Change level id in py code
+3. Run lexer.py to generate json file
 
 # Create trap Example
 set traps in few codes 
@@ -57,7 +56,9 @@ var levels = {
 				count = 1,
 			},
 			"trap" = TrapSpring.new()
-		}]}
+		}
+    ]
+}
 ```
 
 # Preview
